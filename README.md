@@ -1,30 +1,27 @@
-# Symfony Docker
+# Profiler POC
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
-
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+![CI](https://github.com/vasilvestre/profiler-talk-poc/workflows/CI/badge.svg)
 
 ## Getting Started
 
 1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 2. Run `docker compose build --no-cache` to build fresh images
 3. Run `docker compose up --pull always -d --wait` to start the project
+3. Run `make build-css` to download the dependencies and build the CSS
 4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
+## Usage
+Open the project with either symfony server or docker.
+Click on "Profile a request".
+Use `make webgrind` and open `http://localhost:800` to see the profiling results.
+
 ## Features
 
-* Production, development and CI ready
-* Just 1 service by default
-* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and prod)
-* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Super-readable configuration
+* Uses [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html#installation)
+* Uses [FrankenPHP](https://frankenphp.dev)
+* Uses [HTMX](https://htmx.org/)
+* Uses SVG loaders from [Sam Herbert's SVG-Loaders](https://github.com/SamHerbert/SVG-Loaders?tab=readme-ov-file)
 
 **Enjoy!**
 

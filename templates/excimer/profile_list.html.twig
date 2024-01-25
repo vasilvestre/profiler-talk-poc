@@ -1,0 +1,12 @@
+<ul>
+    {% for profile in profiles %}
+        <li>
+            <a
+                class="text-blue-600 visited:text-purple-600"
+                href="excimer/{{ profile.name }}"
+                download
+            >{{ profile.name }}</a>
+            <span>{{ profile.time|date }}</span>
+        </li>
+    {% endfor %}
+</ul>

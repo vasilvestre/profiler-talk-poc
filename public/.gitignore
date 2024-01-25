@@ -1,0 +1,4 @@
+xdebug/cachegrind.out.*
+xhprof/*
+excimer/*
+!*/.gitkeep

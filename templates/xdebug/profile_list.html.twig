@@ -1,0 +1,10 @@
+<ul>
+    {% for profile in profiles %}
+        <li>
+            <a
+                class="text-blue-600 visited:text-purple-600"
+                href="xdebug/{{ profile.name }}">{{ profile.name }}</a>
+            <span>{{ profile.time|date }}</span>
+        </li>
+    {% endfor %}
+</ul>

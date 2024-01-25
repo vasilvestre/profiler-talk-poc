@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profiler exploration{% endblock %}
+
+{% block body %}
+<div class="flex flex-col min-h-screen mx-4">
+    <div class="grid grid-cols-2 gap-4 w-full h-full">
+        <div class="flex flex-col items-center justify-center h-full w-full">
+            <h1 class="text-2xl">Profilers</h1>
+            <h2 class="text-xl">Xdebug</h2>
+            <div
+                class="flex flex-col items-center justify-center y-4"
+            >
+                <form
+                    hx-post="{{ path('profile_this_request', {'profiler': 'xdebug'}) }}"
+                    hx-swap="none"
+                >
+                    <input type="hidden" name="XDEBUG_PROFILE" value="StartProfileForMe">
+                    <button
+                        class="rounded-none bg-lime-500 px-4 py-2"
+                        type="submit"
+                    >
+                        Profile a request
+                        <img
+                            class="htmx-indicator h-6 inline"
+                            src="{{ asset('images/rings.svg') }}"
+                            alt="spinner during request"
+                        >
+                    </button>
+                </form>
+                <button
+                    class="rounded-none bg-green-500 px-4 py-2"
+                    hx-get="{{ path('xdebug_profile_outputs') }}"
+                    hx-target="#search-results"
+                >
+                    Get xdebug profile outputs
+                </button>
+            </div>
+            <h2 class="text-xl">XHPROF</h2>
+            <form
+                hx-post="{{ path('profile_this_request', {'profiler': 'xhprof'}) }}"
+                hx-swap="none"
+            >
+                <button
+                    class="rounded-none bg-lime-500 px-4 py-2"
+                    type="submit"
+                >
+                    Profile a request
+                    <img
+                        class="htmx-indicator h-6 inline"
+                        src="{{ asset('images/rings.svg') }}"
+                        alt="spinner during request"
+                    >
+                </button>
+            </form>
+            <button
+                class="rounded-none bg-green-500 px-4 py-2"
+                hx-get="{{ path('xhprof_profile_outputs') }}"
+                hx-target="#search-results"
+            >
+                Get excimer profile output
+            </button>
+            <h2 class="text-xl">Excimer</h2>
+            <form
+                hx-post="{{ path('profile_this_request', {'profiler': 'excimer'}) }}"
+                hx-swap="none"
+            >
+                <button
+                    class="rounded-none bg-lime-500 px-4 py-2"
+                    type="submit"
+                >
+                    Profile a request
+                    <img
+                        class="htmx-indicator h-6 inline"
+                        src="{{ asset('images/rings.svg') }}"
+                        alt="spinner during request"
+                    >
+                </button>
+            </form>
+            <button
+                class="rounded-none bg-green-500 px-4 py-2"
+                hx-get="{{ path('excimer_profile_outputs') }}"
+                hx-target="#search-results"
+            >
+                Get excimer profile output
+            </button>
+            <button
+                class="rounded-none bg-green-500 px-4 py-2"
+                hx-get="{{ path('speedscope_iframe') }}"
+                hx-target="#iframe"
+            >
+                Show speedscope
+            </button>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full w-full">
+            <div id="search-results"></div>
+        </div>
+    </div>
+    <div id="iframe"></div>
+</div>
+{% endblock %}

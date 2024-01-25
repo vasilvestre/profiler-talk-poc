@@ -26,8 +26,9 @@ RUN set -eux; \
 	install-php-extensions \
 		@composer \
 		apcu \
+    	excimer \
 		intl \
-		opcache \
+    	xhprof \
 		zip \
 	;
 
@@ -35,6 +36,10 @@ RUN set -eux; \
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 ###> recipes ###
+###> doctrine/doctrine-bundle ###
+RUN apk add --no-cache sqlite;
+RUN install-php-extensions pdo_sqlite;
+###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
 COPY --link frankenphp/conf.d/app.ini $PHP_INI_DIR/conf.d/
