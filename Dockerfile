@@ -1,7 +1,7 @@
 #syntax=docker/dockerfile:1.4
 
 # Versions
-FROM dunglas/frankenphp:1-alpine AS frankenphp_upstream
+FROM dunglas/frankenphp:1-php8.3 AS frankenphp_upstream
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
@@ -15,7 +15,7 @@ WORKDIR /app
 
 # persistent / runtime deps
 # hadolint ignore=DL3018
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
 		acl \
 		file \
 		gettext \
@@ -28,6 +28,7 @@ RUN set -eux; \
 		apcu \
     	excimer \
 		intl \
+		opcache \
     	xhprof \
 		zip \
 	;
@@ -37,7 +38,6 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 ###> recipes ###
 ###> doctrine/doctrine-bundle ###
-RUN apk add --no-cache sqlite;
 RUN install-php-extensions pdo_sqlite;
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
